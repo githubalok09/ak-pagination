@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import AppNew from './AppNew';
+import AppRedux from './AppRedux';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/reducer'
@@ -12,7 +13,9 @@ window.store = store
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <AppNew />
+    {/* <App /> */}
+      {/* <AppNew /> */}
+      <AppRedux />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

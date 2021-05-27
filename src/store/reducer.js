@@ -1,23 +1,27 @@
-import { createStore } from 'redux'
-import axios from 'axios'
-const initialState = {list:[]}
-  
-  const testReducer = (state = initialState, action) => {
-     if (action.type === 'GET_DATA') {
+import { createStore, applyMiddleware  } from 'redux'
+import thunk from "redux-thunk";
+//const initialState = {list:[]}
+
+function reducer(state = { data: "" }, action) {
+  switch (action.type) {
+    case "FETCH_DATA":
       return {
-        axios
-        .get(`https://jsonplaceholder.typicode.com/photos`)
-        .then(res => {
-            const data = res.data;           
-            setPageCount(Math.ceil(data.length / perPage));           
-            getFilterdata(data, offset, perPage);
-        });
-        list:state.list
-      }
-    }
-    return state
+        ...state,
+        data: action.data,
+        pageCount: action.pageCount,
+        offset:0
+      };
+      case "FILTER_DATA":
+      console.log('FILTER_DATA', action.filterData);
+      return {
+        ...state,
+        filterData: action.filterData,
+      };
+      
+    default:
+      return state;
   }
+}
 
-const store = createStore(testReducer)
-
+const store = createStore(reducer, applyMiddleware(thunk))
 export default store

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import ItemList from './Itemlist';
 import Pagination from './Pagination';
-import { getList } from './export'
-import { connect } from 'react-redux'
 
 const AppNew = (props) => {
     const [offset, setOffset] = useState(0);
@@ -12,25 +10,7 @@ const AppNew = (props) => {
     const [perPage] = useState(5);
     const [currentPage, setCurrentPage] = useState(0);
     const [filterdata, setFilterdata] = useState(0);
-
     const [list, setList] = useState([]);
-
-    /* useEffect(() => {
-         let mounted = true;
-         getList()
-           .then(items => {
-             if(mounted) {
-               setList(items)
-               setPageCount(Math.ceil(items.length / perPage)); 
-               setTimeout(
-                 () =>  getFilterdata(), 
-                 300
-              );
-             }
-           })
-         return () => mounted = false;
-       }, [])
-      */
 
     const getData = () => {
         axios
@@ -38,19 +18,13 @@ const AppNew = (props) => {
             .then(res => {
                 const data = res.data;
                 //console.log(data);                
-                // setList(data);     
-
-               /* props.dispatch({
-                    type: 'GET_DATA',
-                    payload: data
-                })*/
-
-
+                 setList(data); 
                 setPageCount(Math.ceil(data.length / perPage));
                 //console.log('pageCount'+pageCount);  
                 getFilterdata(data, offset, perPage);
             });
     }
+
     const getFilterdata = (list, offset, perPage) => {
         const slice = list.slice(offset, offset + perPage)
         setFilterdata(slice);
@@ -90,14 +64,4 @@ const AppNew = (props) => {
         </div>
     )
 };
-const mapStateToProps = list => {
-    //   console.log('state11', list)
-    return { list: list }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getData: () => dispatch({ type: 'GET_DATA' })
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(AppNew)
+export default AppNew

@@ -24,18 +24,6 @@ class App extends Component {
         .get(`https://jsonplaceholder.typicode.com/photos`)
         .then(res => {
           const data = res.data;
-
-          /*   const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage)
-          // const slice = data.slice((this.state.offset - 1) * this.state.perPage, this.state.offset * this.state.perPage)
-          
-           const postData = slice.map(pd =>          
-               <ItemList            
-                 id={pd.id}
-                 title={pd.title}
-                 thumbnailUrl ={pd.thumbnailUrl}
-                 />
-           )*/
-
           this.setState({
             pageCount: Math.ceil(data.length / this.state.perPage),
             postData: data           
@@ -53,14 +41,7 @@ class App extends Component {
     console.log(slice);
     this.setState({
       filterdata:slice,
-    })
-    /*const postData = slice.map(pd =>
-      <ItemList
-        id={pd.id}
-        title={pd.title}
-        thumbnailUrl={pd.thumbnailUrl}
-      />
-    )*/
+    })   
 }
 
 handlePageClick = (e) => {
