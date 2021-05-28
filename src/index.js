@@ -1,9 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 import './index.css';
 import App from './App';
 import AppNew from './AppNew';
 import AppRedux from './AppRedux';
+import AppConnect from './AppConnect';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/reducer'
@@ -15,7 +23,37 @@ ReactDOM.render(
     <Provider store={store}>
     {/* <App /> */}
       {/* <AppNew /> */}
-      <AppRedux />
+      {/* <AppRedux /> */}
+      {/* <AppConnect/> */}
+
+       <div>
+       <Router>
+          <div>
+            <ul>
+              <li>
+                <Link to="/App">App</Link>
+              </li>
+              <li>
+                <Link to="/AppNew">Appnew</Link>
+              </li>
+              <li>
+                <Link to="/AppRedux">AppRedux</Link>
+              </li>
+              <li>
+                <Link to="/AppConnect">AppConnect</Link>
+              </li>
+            </ul>
+           <br></br>
+            <Switch>
+              <Route exact path="/App" component={App} />
+              <Route exact path="/AppNew" component={AppNew} />
+              <Route exact path="/AppRedux" component={AppRedux} />
+              <Route exact path="/AppConnect" component={AppConnect} />
+            </Switch>
+          </div>
+        </Router>
+       </div>
+     
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

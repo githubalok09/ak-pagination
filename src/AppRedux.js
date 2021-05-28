@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 import ItemList from './Itemlist';
 import Pagination from './Pagination';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector , connect} from "react-redux";
 
 const AppNewRedux = (props) => {
     const content = useSelector(state => state); //this hook gives us redux store state
@@ -75,4 +75,9 @@ const AppNewRedux = (props) => {
     )
 };
 
+// const mapStateToProps = state => ({
+//     ...state
+//   });
+
+//export default connect()(AppNewRedux);
 export default AppNewRedux;
