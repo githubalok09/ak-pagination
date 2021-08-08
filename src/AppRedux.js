@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 import './App.css';
 import ItemList from './Itemlist';
@@ -9,9 +9,10 @@ const AppNewRedux = (props) => {
     const content = useSelector(state => state); //this hook gives us redux store state
     const dispatch = useDispatch(); //this hook gives us dispatch method
     const perPage = 5;
+    const {data} = content;
     
     console.log(content);
-    //async action
+    //async action 
     function getData() {
         return dispatch => {
             axios.get(`https://jsonplaceholder.typicode.com/photos`)
@@ -21,24 +22,35 @@ const AppNewRedux = (props) => {
                         data: res.data,
                         pageCount: Math.ceil(res.data.length / perPage)
                     }),
+
+                    // setTimeout(getFilterdata(content.data, perPage, content.offSet),100)
                     
                 );
         };
     }
+
+    useEffect(() => {
+        console.log("useeffect");
+        if (data) {
+            getFilterdata(data, perPage, content.offSet);
+        }
+    },[data]);
+
     function onFetchdata() {
         //invoking action
-        dispatch(getData(),
-        getFilterdata(content.data, perPage, content.offSet)
+        dispatch(getData()
+       
         );
       
     }
 
     const getFilterdata = (data, perPage, offSet = 0 ) => {
-        const slice = data.slice(offSet, offSet + perPage)
+        const offSetnew = offSet + perPage;
+        const slice = data.slice(offSet, offSetnew)
         dispatch({
             type: "FILTER_DATA",
             filterData:slice,
-            offSet: offSet
+            offSet: offSetnew
         });       
     }
 
@@ -48,7 +60,7 @@ const AppNewRedux = (props) => {
        // setCurrentPage(selectedPage);
        // setOffset(offset);
         // console.log('handelClick-list', list)
-        getFilterdata(content.data, perPage, offset)
+        getFilterdata(data, perPage, offset)
     }
   
     return (
