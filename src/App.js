@@ -3,6 +3,7 @@ import axios from 'axios'
 import './App.css';
 import ItemList from './Itemlist'
 import Pagination from './Pagination'
+import { StrictMode} from 'react';
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +22,8 @@ class App extends Component {
 
   receivedData(){  
       axios
-        .get(`https://jsonplaceholder.typicode.com/photos`)
+       // .get(`https://jsonplaceholder.typicode.com/photos`)
+       .get(`http://127.0.0.1:5000/api/get`)
         .then(res => {
           const data = res.data;
           this.setState({

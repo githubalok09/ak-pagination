@@ -12,6 +12,7 @@ import App from './App';
 import AppNew from './AppNew';
 import AppRedux from './AppRedux';
 import AppConnect from './AppConnect';
+import Materialui from './MaterialUI';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store/reducer'
@@ -40,7 +41,10 @@ ReactDOM.render(
                 <Link to="/AppRedux">AppRedux</Link>
               </li>
               <li>
-                <Link to="/AppConnect">AppConnect</Link>
+                <Link to="/AppConnect">AppConnect</Link>                
+              </li>
+              <li>
+                <Link to="/MaterialUI">Materialui</Link>
               </li>
             </ul>
            <br></br>
@@ -49,6 +53,7 @@ ReactDOM.render(
               <Route exact path="/AppNew" component={AppNew} />
               <Route exact path="/AppRedux" component={AppRedux} />
               <Route exact path="/AppConnect" component={AppConnect} />
+              <Route exact path="/MaterialUI" component={Materialui} />
             </Switch>
           </div>
         </Router>
